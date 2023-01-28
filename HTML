@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form>
+  Command:<br>
+  <input type="text" id="command">
+  <br><br>
+  <button onclick="runCommand()">Submit</button>
+</form> 
+
+<p id="output"></p>
+
+<script>
+function runCommand() {
+  var command = document.getElementById("command").value;
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("output").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("POST", "http://localhost:8000/run_command", true);
+  xhttp.send(command);
+}
+</script>
+
+</body>
+</html>
